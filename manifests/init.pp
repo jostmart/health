@@ -6,8 +6,6 @@ class health (
 ) {
 
   validate_hash($settings)
-  create_resources('health::health_php', $settings );
+  create_resources('health::healthscript', $settings )
 
 } 
-
-
