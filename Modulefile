@@ -1,0 +1,7 @@
+name 'health'
+Version '0.1'
+author 'jostmart'
+license 'Apache'
+summary 'Health check module for LAMP'
+project_page 'https://github.com/jostmart/health'
+dependency 'puppetlabs/puppetlabs-inifile'

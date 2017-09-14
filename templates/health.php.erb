@@ -1,0 +1,61 @@
+<?php
+#
+# This file is deployed with Puppet
+# Do not edit
+#
+# inifile - full path and filename
+# section - which section to read inside the ini-file
+#
+
+new Health("<%= inifile %>", <%= section -%>);
+header('HTTP/1.1 200 OK');
+exit(0);
+
+class Health {
+
+    var $ini_path;
+    var $site;
+
+    public function __construct($ini_path, $site) {
+
+        $this->ini_path = $ini_path;
+        $this->site     = $site;
+
+        try {
+            $this->mysql();
+            $this->curl();
+        } catch (Exception $e) {
+            # Make sure Varnish doesnt cache an error page
+            header("HTTP/1.0 500 Internal Server Error");
+
+            echo $e->getMessage();
+            echo $e->getCode();
+
+            exit(2);
+        }
+    }
+
+    private function __destruct() {
+    }
+
+    private function mysql() {
+        $ini_array  = parse_ini_file($this->ini_path, true);
+        $connection = mysqli_connect($ini_array["$this->site"]['db_host'],
+                                     $ini_array["$this->site"]['db_user'],
+                                     $ini_array["$this->site"]['db_password'],
+                                     $ini_array["$this->site"]['db_name']);
+
+        if (mysqli_connect_errno()) {
+            throw new Exception("Could not connect to mysql server!");
+        }
+
+        mysqli_close($connection);
+    }
+
+    private function curl() {
+        $ch = curl_init();
+        curl_close($ch);
+    }
+}
+
+?>
