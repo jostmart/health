@@ -13,10 +13,10 @@ define health::healthscript (
 ) {
 
   # deploy your health check script in a pre existing directory
-  file { "${script_name}": 
-    name    => "${path}/${script_name}",
-    content => template("health/${template}"),
-    ensure  => present;
+  file { 
+    "${path}/${script_name}": 
+      content => template("health/${template}"),
+      ensure  => present;
   }
 
 }
