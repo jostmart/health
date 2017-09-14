@@ -3,12 +3,19 @@
 #
 class health::ini_settings (
   $settings,
-  $path,
+  $config_root='/srv/health',
   $inifilename,
 ) {
 
+
+  Ini_setting { require => File["$config_root"] }
+
+  file { $config_root:
+    ensure => directory;
+  }
+
   validate_hash($settings)
-  $defaults = { 'path' => "${path}/${inifilename}" }
+  $defaults = { 'path' => "${config_root}/${inifilename}" }
 
   create_ini_settings($settings, $defaults)
 }
