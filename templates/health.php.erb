@@ -7,7 +7,7 @@
 # section - which section to read inside the ini-file
 #
 
-new Health("<%= inifile %>", <%= section -%>);
+new Health("<%= inifile %>", "<%= section -%>");
 header('HTTP/1.1 200 OK');
 exit(0);
 
