@@ -14,13 +14,13 @@ You can create more templates in order to check more stuff than what is provided
 
 #### Settings for class health::ini_settings
 
-#### `ini_settings::config_root`
+##### `ini_settings::config_root`
 What directory your script want to read its ini-file from.
 
-#### `ini_settings::inifilename`
+##### `ini_settings::inifilename`
 What your script want the ini-file to be named.
 
-#### `ini_settings::settings`
+##### `ini_settings::settings`
 Should be a hash containing whatever you want to put into the ini-file.
 Look at the module https://github.com/puppetlabs/puppetlabs-inifile for more formating documentation.
 
@@ -54,21 +54,21 @@ have many virtualhosts. Create different sections as in the example above with w
 Refer to each section with parameter 'section' in the hash health::settings.
 
 
-### Explanation of each setting
+#### Explanation of each setting
 
-#### `template`
+##### `template`
 The script you want to use for your check(s), provided in this module as a template.
 
-#### `script_name`
+##### `script_name`
 When the template are written into path, script_name is the filename that should be used.
 
-#### `path`
+##### `path`
 Where you want your template to be written into the script you want to use.
 
-#### `inifile`
+##### `inifile`
 If your script uses any configuration data, point this to the inifile.
 
-#### `section`
+##### `section`
 What section in inifile to read in order to fetch the configuration data.
 
     health::settings:
