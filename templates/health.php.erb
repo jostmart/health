@@ -9,6 +9,7 @@
 
 new Health("<%= inifile %>", "<%= section -%>");
 header('HTTP/1.1 200 OK');
+header('Site: <%= section -%>');
 exit(0);
 
 class Health {
